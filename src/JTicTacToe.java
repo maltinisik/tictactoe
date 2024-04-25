@@ -1,13 +1,15 @@
 import java.util.Scanner;
 
+import com.tictactoe.engine.player.ai.BoardEvaluator;
 import com.tictactoe.engine.player.ai.MiniMax;
 import com.tictactoe.engine.player.ai.MoveStrategy;
+import com.tictactoe.engine.player.ai.StandartBoardEvaluator;
 import com.tictactoe.engine.board.Board;
 import com.tictactoe.engine.board.Move;
 
 public class JTicTacToe {
 
-	private static final int SEARCH_DEPTH = 9;
+	private static final int SEARCH_DEPTH = 10;
 
 	public static void main(String[] args) throws Exception {
 		int move_index = 0;
@@ -16,6 +18,8 @@ public class JTicTacToe {
 	    Scanner input = new Scanner(System.in);
 	    boolean checkGameOverWithDraw = false;
 	    int turn = 0;
+	    
+	    BoardEvaluator boardEvaluator = StandartBoardEvaluator.get();
 
 	    //comment
 		do {
@@ -32,8 +36,12 @@ public class JTicTacToe {
 			//}
 			//}
 			//else {
+			if (turn==4) {
+				System.out.println(board.getCurrentPlayer());
+			}
 				move = getBestMove(board);
 				board = move.execute();
+
 				System.out.println("ai move \n"+board.toString());				
 //			}
 			
